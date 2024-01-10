@@ -1,0 +1,37 @@
+server:
+  port: 8044
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-demo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useSSL=false
+    username: root
+    password: li333
+    # 打开druid监控后台
+    druid:
+      stat-view-servlet:
+        url-pattern: /druid/*
+        enabled: true
+        reset-enable: false
+        login-username: druid
+        login-password: li333
+  # MyBatis-plus配置
+  mybatis-plus:
+    # 配置Mapper映射文件位置
+    mapper-locations: classpath*:/mapper/*Mapper.xml
+    # 配置使用默认的IdWorker雪花算法生成id
+    global-config:
+      db-config:
+        id-type: assign_id
+        table-underline: true
+      banner: false
+    # 配置MyBatis数据返回类型别名(默认别名是类名)
+    type-aliases-package: com.yoxwei.domain
+    configuration:
+      # 自动驼峰命名
+      map-underscore-to-camel-case: true
+
+# MyBatis SQL 打印(方法接口所在的包,不是Mapper.xml所在的包)
+logging:
+  level:
+    com.yoxwei.mapper: debug
